@@ -24,6 +24,15 @@ public class Pedido implements Serializable{
 				+ ", id_contrato=" + id_contrato + ", importe_facturado=" + importe_facturado + "]";
 	}
 	
+	public void actualizarImporteFacturado(double incremento) {
+		importe_facturado+=incremento;
+	}
+	
+	public Factura generarFactura(double importe, String concepto, double iva) {
+		return new Factura(id_pedido,id,id_pedido,fecha,id_servicio,
+				importe,id_forma_pago,id_contrato,concepto, iva);
+	}
+	
 	
 	//Constructores
 	public Pedido() {}

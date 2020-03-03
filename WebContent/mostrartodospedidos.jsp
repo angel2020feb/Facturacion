@@ -39,11 +39,10 @@
 				<td><%=p.getId_contrato()%></td>
 				<td><%=p.getImporte_facturado()%></td>			
 			</tr>		
-		<%}%>
-		
+		<%}%>		
 		</table>
 		
 		<br><br>
-		<a href="index.jsp">Volver al index</a>
+		<a href="servletlogin?op=1">Volver al menú</a>
 	</body>
 </html>

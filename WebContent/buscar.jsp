@@ -27,6 +27,11 @@
 		<jsp:forward page="servletfacturacion?op=4"/>
 		<%}%>
 		
+		<% if(request.getParameter("id_servicio") != null){%>
+		<jsp:useBean id="servicioproducto" scope="request" class="com.vipper.modelo.ServicioProducto"/>
+		<jsp:setProperty name="servicioproducto" property="*"/>
+		<jsp:forward page="servletfacturacion?op=6"/>
+		<%}%>
 		
 		<form action="buscar.jsp" method="post">
 			Buscar Pedido : <input type="text" name="id_pedido"/>
@@ -34,13 +39,19 @@
 		</form>
 		<br><br>
 		
-		
 		<form action="buscar.jsp" method="post">
 			Buscar Cliente/Proveedor : <input type="text" name="id"/>
 			<input type="submit" value="Buscar Cliente/Proveedor"/>
 		</form>
+		<br><br>
+		
+		<form action="buscar.jsp" method="post">
+			Buscar Servicio/Producto : <input type="text" name="id_servicio"/>
+			<input type="submit" value="Buscar Servicio/Producto"/>
+		</form>
+		<br><br>
 		
 		<br><br>
-		<a href="index.jsp">Volver al index</a>
+		<a href="servletlogin?op=1">Volver al menú</a>
 	</body>
 </html>

@@ -41,6 +41,7 @@ public class ServletLogin extends HttpServlet {
 		case 1:
 			//Verificar si el usuario está logueado
 			//Recoger las cookies
+			//Redirige al usuario o al admin a su menú
 			
 			Cookie[] cookies = request.getCookies();
 			for (Cookie cookie : cookies) {

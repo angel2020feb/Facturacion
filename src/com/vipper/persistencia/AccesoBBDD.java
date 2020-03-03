@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.vipper.modelo.*;
+import java.util.Calendar;
 
 public class AccesoBBDD extends Conexion {
 	
@@ -92,6 +93,36 @@ public class AccesoBBDD extends Conexion {
 		return result;		
 	}
 
+	public int altaPedido(Pedido o) throws ClassNotFoundException, SQLException{
+        //Variables   
+        int numRegistro = 0;
+        String SQL = "call facturacion.alta_pedido(?,?,?,?,?,?,?,?,?);";
+        CallableStatement st;
+
+        //Abrir conexion
+        abrirConexion();
+        
+        //Obtener Comando
+        st = miConexion.prepareCall(SQL);
+        
+        //Asignar valores
+        st.setInt(1, o.getId());
+        st.setInt(2, o.getId_pedido());
+        st.setString(3, o.getDescrip());
+        st.setInt(4, o.getId_forma_pago());
+        st.setDouble(5, o.getTotal());
+        st.setDate(6, java.sql.Date.valueOf(o.getFecha()), Calendar.getInstance());
+        st.setInt(7, o.getId_pedido());
+        st.setInt(8, o.getId_contrato());
+        st.setDouble(9, o.getImporte_facturado());
+        
+        numRegistro = st.executeUpdate();
+        
+        cerrarConexion();
+        
+        return numRegistro;
+    }
+	
 	
 	//----- ClienteProveedor
 	public List<ClienteProveedor> mostrarTodosClientesProveedores() throws ClassNotFoundException, SQLException{
@@ -245,12 +276,11 @@ public class AccesoBBDD extends Conexion {
 	}
 	
 	
-	
-	
+
 	//----- ServicioProducto
 	public List<ServicioProducto> mostrarTodosServiciosProductos() throws ClassNotFoundException, SQLException{
 		//Definir variables
-		String SQL = "      ";
+		String SQL = "call facturacion.MostrarTodosServiciosProducto();";
 		List<ServicioProducto> result = new ArrayList<ServicioProducto>();
 		CallableStatement st;
 		ResultSet rs;
@@ -284,7 +314,7 @@ public class AccesoBBDD extends Conexion {
 
 	public ServicioProducto mostrarServicioProducto(int idPedido) throws ClassNotFoundException, SQLException{
 		//Definir variables
-		String SQL = "     ";
+		String SQL = "call facturacion.mostrarServicioProducto(?);";
 		ServicioProducto result = null;
 		CallableStatement st;
 		ResultSet rs;
