@@ -16,6 +16,7 @@
 			<li>ID Cliente/Proveedor: <%=servicioproducto.getId()%></li>
 			<li>IVA: <%=servicioproducto.getIva()%></li>
 		</ul>	
+		
 		<br><br>
 		<a href="servletlogin?op=1">Volver al menú</a>			
 	</body>

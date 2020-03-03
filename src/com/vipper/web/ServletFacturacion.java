@@ -57,6 +57,7 @@ public class ServletFacturacion extends HttpServlet {
 				Pedido jPedido = null;
 				ClienteProveedor jClienteProveedor = null;
 				ServicioProducto jServicioProducto = null;
+				Factura jFactura = null;
 				
 				switch (jopcion) {
 				case 1:			
@@ -189,6 +190,51 @@ public class ServletFacturacion extends HttpServlet {
 					rd.forward(request, response);
 					break;
 
+				case 7:			
+					//MostrarTodos, se llama desde el index
+					//Instanciar ArrayList
+					List<Factura> facturasBBDD = null;
+					accesoBBDD = new AccesoBBDD();
+					try {
+						facturasBBDD = accesoBBDD.mostrarTodosFacturas();
+					} catch (ClassNotFoundException | SQLException e) {
+						System.out.println(e.toString());
+					}
+					
+					//Guardar los productos en ámbito request HttpServletRequest
+					request.setAttribute("requestTodosFacturas", facturasBBDD);
+					
+					//Redirigir desde este Servlet a la pagina jsp de mostrar todos
+					rd = request.getRequestDispatcher("/mostrartodosfacturas.jsp");
+					rd.forward(request, response); //Ejecuta el envío a través del response
+					
+					break;
+					
+				case 8:
+					jServicioProducto = (ServicioProducto)request.getAttribute("servicioproducto");
+					accesoBBDD = new AccesoBBDD();
+					try {
+						jServicioProducto = accesoBBDD.mostrarServicioProducto(jServicioProducto.getId_servicio());
+						
+						if (jServicioProducto == null) {
+							request.setAttribute("mensajeError", "Servicio/Producto no encontrado");
+							rd = request.getRequestDispatcher("/paginaerror.jsp");
+							rd.forward(request, response);
+							break;
+						}
+
+						System.out.println("Servicio/Producto encontrado" + jServicioProducto.toString());
+					} catch (ClassNotFoundException | SQLException e) {
+						System.out.println(e.toString());
+					} 
+					//Se guarda el producto con los datos de la BBDD en el ambito request
+					request.setAttribute("servicioproducto", jServicioProducto);
+					rd = request.getRequestDispatcher("/mostrarservicioproducto.jsp");
+					rd.forward(request, response);
+					break;
+					
+					
+					
 				default:
 					
 					break;
