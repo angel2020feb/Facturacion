@@ -4,16 +4,14 @@
 <html>
 	<head>
 		<meta charset="ISO-8859-1">
-		<title>Facturacion</title>
+		<title>Index</title>
 	</head>
 	<body>
-		<h1>INDEX</h1>
-		<a href="buscar.jsp">Buscar</a>
+		<h1>Bienvenido</h1>
+
+		<a href="servletlogin?op=1">Acceder</a>
 		<br><br>
-		<a href="servletfacturacion?op=1">Mostrar todos los pedidos</a>
-		<br><br>
-		<a href="servletfacturacion?op=3">Mostrar todos los clientes/proveedores</a>
-		<br><br>
+		
 		
 	</body>
 </html>

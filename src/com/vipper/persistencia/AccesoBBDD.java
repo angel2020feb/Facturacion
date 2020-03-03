@@ -317,7 +317,7 @@ public class AccesoBBDD extends Conexion {
 	
 	//----- Login usuario
 	public String verificarPassword(String usuario) throws ClassNotFoundException, SQLException {
-		String SQL = "call tiendaonline.verificarPassword(?)";		
+		String SQL = "call facturacion.verificarPassword(?)";		
 		CallableStatement st;
 		ResultSet rs;
 		String password = null;
@@ -335,13 +335,49 @@ public class AccesoBBDD extends Conexion {
 		rs = st.executeQuery();
 		
 		if (rs.next()) {
-			password = rs.getString("pass");
+			password = rs.getString("password");
 		}
 				
 		//Cerrar conexion
 		cerrarConexion();
 		
+		//System.out.println("PROCEDIMIENTO ALMACENADO:");
+		//System.out.println(password);
+		
 		return password;
 	}
 
+	public Usuario mostrarUsuario(String usuario) throws ClassNotFoundException, SQLException{
+		//Definir variables
+		String SQL = "call facturacion.mostrarUsuario(?);";
+		Usuario result = null;
+		CallableStatement st;
+		ResultSet rs;
+		
+		//Abrir la conexion
+		abrirConexion();
+		
+		//Recoger el comando
+		st = miConexion.prepareCall(SQL);
+		st.setString(1,usuario);		
+		
+		//Ejecutamos el comando
+		rs = st.executeQuery();
+		
+		//Recorremos el Result Set para crear la conexión
+		if (rs.next()) {
+			//int idUsuario, String nomUsuario, String password, int tipoUsuario
+			result = new Usuario(
+				rs.getInt("id_usuario"), 
+				rs.getString("nom_usuario"),
+				rs.getString("password"),
+				rs.getInt("tipoUsuario")
+			);
+		}
+		
+		cerrarConexion();		
+		return result;		
+	}
+
+	
 }
