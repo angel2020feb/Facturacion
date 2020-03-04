@@ -9,7 +9,7 @@
 	<body>
 		<h1>Bienvenido</h1>
 
-		<a href="servletlogin?op=1">Acceder</a>
+		<a href="servletlogin?op=1">Acceder a la página de facturación</a>
 		<br><br>
 		
 		
