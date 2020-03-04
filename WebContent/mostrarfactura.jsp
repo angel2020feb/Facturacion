@@ -19,5 +19,7 @@
 	    <li>IVA: <%=factura.getIva() %></li>						
 	</ul>
 	
+	<br><br>
+		<a href="servletlogin?op=1">Volver al menú</a>
 	</body>
 </html>

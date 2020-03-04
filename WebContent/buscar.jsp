@@ -33,6 +33,12 @@
 		<jsp:forward page="servletfacturacion?op=6"/>
 		<%}%>
 		
+		<% if(request.getParameter("id_factura") != null){%>
+		<jsp:useBean id="factura" scope="request" class="com.vipper.modelo.Factura"/>
+		<jsp:setProperty name="factura" property="*"/>
+		<jsp:forward page="servletfacturacion?op=8"/>
+		<%}%>
+		
 		<form action="buscar.jsp" method="post">
 			Buscar Pedido : <input type="text" name="id_pedido"/>
 			<input type="submit" value="Buscar Pedido"/>
@@ -48,6 +54,12 @@
 		<form action="buscar.jsp" method="post">
 			Buscar Servicio/Producto : <input type="text" name="id_servicio"/>
 			<input type="submit" value="Buscar Servicio/Producto"/>
+		</form>
+		<br><br>
+		
+		<form action="buscar.jsp" method="post">
+			Buscar Factura : <input type="text" name="id_factura"/>
+			<input type="submit" value="Buscar Factura"/>
 		</form>
 		<br><br>
 		

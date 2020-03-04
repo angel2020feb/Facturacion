@@ -200,7 +200,7 @@ public class AccesoBBDD extends Conexion {
 	//----- Factura
 	public List<Factura> mostrarTodosFacturas() throws ClassNotFoundException, SQLException{
 		//Definir variables
-		String SQL = "      ";
+		String SQL = "call facturacion.mostrarTodasFacturas();";
 		List<Factura> result = new ArrayList<Factura>();
 		CallableStatement st;
 		ResultSet rs;
@@ -240,7 +240,7 @@ public class AccesoBBDD extends Conexion {
 
 	public Factura mostrarFactura(int idFactura) throws ClassNotFoundException, SQLException{
 		//Definir variables
-		String SQL = "     ";
+		String SQL = "call facturacion.mostrarFactura(?);";
 		Factura result = null;
 		CallableStatement st;
 		ResultSet rs;

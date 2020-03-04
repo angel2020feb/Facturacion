@@ -211,29 +211,27 @@ public class ServletFacturacion extends HttpServlet {
 					break;
 					
 				case 8:
-					jServicioProducto = (ServicioProducto)request.getAttribute("servicioproducto");
+					jFactura = (Factura)request.getAttribute("factura");
 					accesoBBDD = new AccesoBBDD();
 					try {
-						jServicioProducto = accesoBBDD.mostrarServicioProducto(jServicioProducto.getId_servicio());
+						jFactura = accesoBBDD.mostrarFactura(jFactura.getId_factura());
 						
-						if (jServicioProducto == null) {
-							request.setAttribute("mensajeError", "Servicio/Producto no encontrado");
+						if (jFactura == null) {
+							request.setAttribute("mensajeError", "Factura no encontrada");
 							rd = request.getRequestDispatcher("/paginaerror.jsp");
 							rd.forward(request, response);
 							break;
 						}
 
-						System.out.println("Servicio/Producto encontrado" + jServicioProducto.toString());
+						System.out.println("Factura encontrada" + jFactura.toString());
 					} catch (ClassNotFoundException | SQLException e) {
 						System.out.println(e.toString());
 					} 
 					//Se guarda el producto con los datos de la BBDD en el ambito request
-					request.setAttribute("servicioproducto", jServicioProducto);
-					rd = request.getRequestDispatcher("/mostrarservicioproducto.jsp");
+					request.setAttribute("factura", jFactura);
+					rd = request.getRequestDispatcher("/mostrarfactura.jsp");
 					rd.forward(request, response);
 					break;
-					
-					
 					
 				default:
 					

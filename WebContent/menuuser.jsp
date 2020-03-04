@@ -16,6 +16,10 @@
 		<br><br>
 		<a href="servletfacturacion?op=5">Mostrar todos los servicios/productos</a>
 		<br><br>
+		<a href="servletfacturacion?op=7">Mostrar todas las Facturas</a>
+		<br><br>
+		<a href="servletfacturacion?op=9">Mostrar todos los Usuarios</a>
+		<br><br>
 		
 	</body>
 </html>
