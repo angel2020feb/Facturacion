@@ -10,7 +10,7 @@
 		<title>Mostrar Todas facturas</title>
 	</head>
 	<body>
-		<p>Todos los facturas son:</p>
+		<p>Todas los facturas son:</p>
 		<!-- Usar un scriplet para recoger todos los productos del ámbito request -->
 		<!-- En este caso request es una palabra reservada -->
 		<% ArrayList<Factura> jFacturas = (ArrayList<Factura>)request.getAttribute("requestTodasFacturas"); %>
