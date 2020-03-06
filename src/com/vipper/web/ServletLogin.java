@@ -37,6 +37,9 @@ public class ServletLogin extends HttpServlet {
 		String jpassword = "";
 		String jtipousuario = "";
 		
+		//miSesion = request.getSession();
+		//miSesion.setAttribute("test", "STRING PRUEBA");
+		
 		switch (jopcion) {
 		case 1:
 			//Verificar si el usuario está logueado
@@ -46,6 +49,7 @@ public class ServletLogin extends HttpServlet {
 			Cookie[] cookies = request.getCookies();
 			for (Cookie cookie : cookies) {
 				if(cookie.getName().equals("usuarionombre")) {
+					jusuario =cookie.getValue();
 					jusuarioLogueado = true;
 				}
 				
@@ -55,6 +59,17 @@ public class ServletLogin extends HttpServlet {
 			}
 						
 			if (jusuarioLogueado) {
+				accesoBBDD = new AccesoBBDD();
+				try {
+					miSesion = request.getSession();					
+					usuario = accesoBBDD.mostrarUsuario(jusuario);
+					miSesion.setAttribute("usuarioInstance", usuario);
+					
+				} catch (ClassNotFoundException | SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 				if (jtipousuario.equals("1")) {
 					rd = request.getRequestDispatcher("/menuadmin.jsp");
 				} else if (jtipousuario.equals("0")) {
@@ -64,20 +79,18 @@ public class ServletLogin extends HttpServlet {
 				rd = request.getRequestDispatcher("/login.jsp");
 			}
 			
+			//System.out.println("USUARIO: " + ((Usuario)miSesion.getAttribute("usuarioInstance")).toString());
+			
 			rd.forward(request, response);			
 			break;
 		case 2:
 			//En caso de que la cookie NO exista, validamos con la BBDD
 			//Recoger el nombre y el usuario de la BBDD
 			//Acceder a la BBDD para verificarlo
-			//Si la contraseña es correcta, lo redirigimos a /solicitarpago.jsp
 			//Creamos la cookie
-			//Si no es corrector, lo redirigimos a página de registro
+
 			jusuario = request.getParameter("user");
 			jpassword = request.getParameter("password");
-						
-			//System.out.println("JUSUARIO " + jusuario);
-			//System.out.println("JPASSWORD " + jpassword);
 			
 			accesoBBDD = new AccesoBBDD();
 			try {
@@ -85,6 +98,9 @@ public class ServletLogin extends HttpServlet {
 					
 					usuario = accesoBBDD.mostrarUsuario(jusuario);
 					jtipousuario = String.valueOf(usuario.getTipoUsuario());
+					
+					miSesion = request.getSession();					
+					miSesion.setAttribute("usuarioInstance", usuario);
 							
 					Cookie miCookieUsuario = new Cookie("usuarionombre",jusuario);
 					Cookie miCookieTipo = new Cookie("usuariotipo",jtipousuario);
@@ -99,6 +115,8 @@ public class ServletLogin extends HttpServlet {
 					} else if (jtipousuario.equals("0")) {
 						rd = request.getRequestDispatcher("/menuuser.jsp");
 					}
+					
+					//System.out.println("USUARIO: " + ((Usuario)miSesion.getAttribute("usuarioInstance")).toString());
 					
 					rd.forward(request, response);
 					

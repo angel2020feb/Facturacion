@@ -19,9 +19,9 @@
 		<a href="servletfacturacion?op=7">Mostrar todas las Facturas</a>
 		<br><br>
 		<a href="servletfacturacion?op=9">Mostrar todos los Usuarios</a>
+		<br><br><br><br>		
+		<a href="servletpedidos?op=1">Realizar Pedido</a>
 		<br><br>
-		
-		
 	
 	</body>
 </html>

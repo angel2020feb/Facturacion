@@ -12,7 +12,7 @@
 		
 		<% Pedido jPedido = (Pedido)session.getAttribute("miPedido"); %>
 		
-		<form action = "servletpedidos?op=2" method = "post">
+		<form action = "servletpedidos?op=3" method = "post">
             Descripcion pedido: <input type = "text" name = "descripcion"/>
             <br>
             Forma de pago: <input type = "text" name = "formapago"/>
